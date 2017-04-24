@@ -8,10 +8,10 @@
 
 # The name of the server
 #   This should be the domain name by which the machine will be accessed over HTTP
-server_name: www.my-slcs-server.com
+server_name: esgf-dev2.llnl.gov  # changeme1
 
 # The email address to use for emails sent by the application
-server_email: no-reply@{{ server_name }}
+server_email: hill119@llnl.gov  # changeme2
 
 #####
 ## Python installation
@@ -42,7 +42,7 @@ application_user: waitress
 # The directory in which to install application code
 #   If not given, this defaults to the home directory of the application_user
 #   Must be readable and writable by the application_user
-# application_home: /path/to/application/home
+application_home: /usr/local/esgf-slcs-server
 
 # The installation mode
 #   Valid values are 'production' and 'development'
@@ -61,18 +61,18 @@ esgf_slcs_server_version: master
 # If true, configure a new local database for the SLCS Django app and optionally
 #   configure a dummy ESGF user database (see use_dummy_userdb below)
 # If false, esgf_slcsdb and esgf_userdb dictionaries must be manually configured
-configure_databases: true
+configure_databases: false
 
 # Required if configure_databases = false
 # Configures access to a database that the ESGF SLCS service can use
 # This is in addition to existing ESGF databases, and managed with Django migrations
 esgf_slcsdb:
   engine: 'django.db.backends.postgresql'
-  name: 'esgcet.esgf_slcs'
+  name: 'slcsdb'
   host: localhost
   port: 5432
   user: dbsuper
-  password: db_password
+  password: password
 
 # Only used if configure_databases = true
 # If true, install and populate a dummy ESGF user database
