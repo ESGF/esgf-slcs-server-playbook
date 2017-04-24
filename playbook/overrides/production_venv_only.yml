@@ -17,7 +17,7 @@ server_email: no-reply@{{ server_name }}
 ## Python installation
 
 # Set this variable to the virtualenv command for the installed Python
-virtualenv_command: /path/to/virtualenv-2.7
+virtualenv_command: /opt/esgf/python/bin/virtualenv
 
 #####
 ## Nginx installation
@@ -61,17 +61,17 @@ esgf_slcs_server_version: master
 # If true, configure a new local database for the SLCS Django app and optionally
 #   configure a dummy ESGF user database (see use_dummy_userdb below)
 # If false, esgf_slcsdb and esgf_userdb dictionaries must be manually configured
-configure_databases: false
+configure_databases: true
 
 # Required if configure_databases = false
 # Configures access to a database that the ESGF SLCS service can use
 # This is in addition to existing ESGF databases, and managed with Django migrations
 esgf_slcsdb:
   engine: 'django.db.backends.postgresql'
-  name: 'esgf_slcs_db_name'
-  host: my-db-host.example.com
+  name: 'esgcet.esgf_slcs'
+  host: localhost
   port: 5432
-  user: db_user
+  user: dbsuper
   password: db_password
 
 # Only used if configure_databases = true
@@ -83,11 +83,11 @@ use_dummy_userdb: false
 # Only read-only access is required
 esgf_userdb:
   engine: 'django.db.backends.postgresql'
-  name: 'esgf_security_db_name'
-  host: my-db-host.example.com
+  name: 'esgcet.esgf_security'
+  host: localhost
   port: 5432
-  user: db_user
-  password: db_password
+  user: dbsuper
+  password: password
 
 #####
 ## CA setup and configuration
@@ -98,9 +98,9 @@ install_test_ca: false
 # If install_test_ca = false, the following variables must be set
 #   They should point to the same CA used for myproxy for consistency, and must
 #   be readable by the application_user
-onlineca_cert_file: /path/to/ca/cert.pem
-onlineca_key_file: /path/to/ca/private.key
-onlineca_trustroots_dir: /path/to/ca/trustroots
+onlineca_cert_file: /var/lib/globus-connect-server/myproxy-ca/cacert.pem
+onlineca_key_file: /var/lib/globus-connect-server/myproxy-ca/private/cakey.pem
+onlineca_trustroots_dir: /etc/grid-security/certificates
 
 # Template for the subject of certificates issued by the SLCS server
 #   $OPENID is replaced with the user's OpenID
@@ -123,4 +123,4 @@ static_root: /var/www/static
 
 # The username in the ESGF user table of the user that should be the Django superuser
 #   This user gets full access to the Django admin
-django_superuser: another
+django_superuser: rootAdmin
