@@ -37,7 +37,7 @@ use_waitress_wsgi: false
 # The user to install and run the application as
 #   This should be an unpriveleged user
 #   If the user doesn't exist, they will be created
-application_user: waitress
+application_user: apache
 
 # The directory in which to install application code
 #   If not given, this defaults to the home directory of the application_user
@@ -83,7 +83,7 @@ use_dummy_userdb: false
 # Only read-only access is required
 esgf_userdb:
   engine: 'django.db.backends.postgresql'
-  name: 'esgcet.esgf_security'
+  name: 'esgcet'
   host: localhost
   port: 5432
   user: dbsuper
