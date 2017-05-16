@@ -8,10 +8,10 @@
 
 # The name of the server
 #   This should be the domain name by which the machine will be accessed over HTTP
-server_name: esgf-dev2.llnl.gov  # changeme1
+server_name: esgf-dev2.llnl.gov  # changeme1 with sed
 
 # The email address to use for emails sent by the application
-server_email: hill119@llnl.gov  # changeme2
+server_email: hill119@llnl.gov  # changeme2 with sed
 
 #####
 ## Python installation
@@ -72,7 +72,7 @@ esgf_slcsdb:
   host: localhost
   port: 5432
   user: dbsuper
-  password: password
+  password: abc123  #changeme with sed
 
 # Only used if configure_databases = true
 # If true, install and populate a dummy ESGF user database
@@ -87,7 +87,7 @@ esgf_userdb:
   host: localhost
   port: 5432
   user: dbsuper
-  password: password
+  password: abc123   #changeme with sed
 
 #####
 ## CA setup and configuration
