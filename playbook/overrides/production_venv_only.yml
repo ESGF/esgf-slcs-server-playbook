@@ -8,10 +8,10 @@
 
 # The name of the server
 #   This should be the domain name by which the machine will be accessed over HTTP
-server_name: esgf-dev2.llnl.gov  # changeme1 with sed
+server_name: test_server_name  # changeme1 with sed
 
 # The email address to use for emails sent by the application
-server_email: hill119@llnl.gov  # changeme2 with sed
+server_email: test_email  # changeme2 with sed
 
 #####
 ## Python installation
