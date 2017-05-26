@@ -6,7 +6,7 @@
 
 - name: Clone ESGF SLCS Server from Github
   git:
-    repo: https://github.com/cedadev/esgf-slcs-server.git
+    repo: https://github.com/ESGF/esgf-slcs-server.git
     version: "{{ esgf_slcs_server_version }}"
     dest: "{{ code_location }}"
   become: yes
