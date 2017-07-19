@@ -141,7 +141,7 @@ with open(ESGF_USERDB_PASSWD_FILE) as f:
     DATABASES['userdb']['PASSWORD'] = f.read().strip()
 {% endif %}
 
-ESGF_USERDB__USER_SCHEMA = "esgf_security"
+ESGF_USERDB_USER_SCHEMA = "esgf_security"
 ESGF_USERDB_USER_TABLE = "user"
 
 AUTH_PASSWORD_VALIDATORS = [
