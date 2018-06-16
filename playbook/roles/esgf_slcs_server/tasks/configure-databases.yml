@@ -32,6 +32,12 @@
   register: create_userdb
   when: use_dummy_userdb
 
+- name: Enable pgcrypto for userdb database
+  command: psql -d esgf_security -f /usr/share/pgsql/contrib/pgcrypto.sql
+  become: yes
+  become_user: postgres
+  when: create_userdb|changed
+
 - name: Install dummy userdb script
   copy: src=files/create-user-table.sql dest=/tmp/create-user-table.sql
   when: create_userdb|changed

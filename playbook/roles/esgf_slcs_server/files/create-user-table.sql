@@ -1,6 +1,8 @@
-DROP TABLE IF EXISTS "user";
+DROP SCHEMA IF EXISTS "esgf_security";
+CREATE SCHEMA "esgf_security";
 
-CREATE TABLE "user" (
+DROP TABLE IF EXISTS "esgf_security"."user";
+CREATE TABLE "esgf_security"."user" (
     id serial PRIMARY KEY,
     firstname character varying(100) NOT NULL,
     middlename character varying(100),
@@ -20,18 +22,18 @@ CREATE TABLE "user" (
     notification_code integer DEFAULT 0
 );
 
-INSERT INTO "user" (
-  username,
-  password,
-  firstname,
-  lastname,
-  email,
-  openid
+INSERT INTO "esgf_security"."user" (
+    username,
+    password,
+    firstname,
+    lastname,
+    email,
+    openid
 ) VALUES (
-  'another',
-  MD5('changeme'),
-  'Andy',
-  'Other',
-  'a.n.other@myinstitution.ac.uk',
-  'https://esgf.llnl.gov/openid/A.N.Other'
+    'another',
+    crypt('changeme', gen_salt('md5')),
+    'Andy',
+    'Other',
+    'a.n.other@myinstitution.ac.uk',
+    'https://esgf.llnl.gov/openid/A.N.Other'
 );
