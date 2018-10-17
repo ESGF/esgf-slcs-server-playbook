@@ -1,11 +1,5 @@
 ---
 
-- name: Install pip for system Python
-  yum: name={{ item }} state=latest
-  with_items:
-    - epel-release
-    - python-pip
-
 - name: Install supervisord
   pip: name=supervisor state=latest executable=pip
   notify:
