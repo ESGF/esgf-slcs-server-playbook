@@ -12,22 +12,15 @@
   become: yes
   become_user: "{{ application_user }}"
 
-- name: Remove existing virtual env
-  file: path={{ application_home }}/venv state=absent
-
 - name: Install ESGF SLCS Server dependencies
   pip:
     requirements: "{{ code_location }}/requirements.txt"
-    virtualenv: "{{ application_home }}/venv"
-    virtualenv_command: "{{ virtualenv_command }}"
   become: yes
   become_user: "{{ application_user }}"
 
 - name: Install ESGF SLCS Server
   pip:
     name: "{{ code_location }}"
-    virtualenv: "{{ application_home }}/venv"
-    virtualenv_command: "{{ virtualenv_command }}"
     extra_args: "--no-deps -e"
   become: yes
   become_user: "{{ application_user }}"
