@@ -4,7 +4,7 @@
   remote_user: root
   force_handlers: yes
   environment:
-    LD_LIBRARY_PATH: /opt/esgf/python/lib:/opt/esgf/python/lib/python2.7:/opt/esgf/python/lib/python2.7/site-packages/mod_wsgi/server
+    LD_LIBRARY_PATH: /usr/local/conda/envs/esgf-pub/lib/:/usr/local/conda/envs/esgf-pub/lib/python2.7/:/usr/local/conda/envs/esgf-pub/lib/python2.7/site-packages/mod_wsgi/server
   roles:
     - git
     - { role: python27, when: virtualenv_command is not defined }
@@ -12,4 +12,3 @@
     - { role: nginx, when: use_nginx_proxy }
     - { role: supervisord, when: use_waitress_wsgi }
     - esgf_slcs_server
-
