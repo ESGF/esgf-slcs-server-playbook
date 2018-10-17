@@ -1,17 +1,4 @@
 ---
-
-- name: Install gcc
-  yum: name=gcc state=latest
-
-- name: Install cryptography dependencies
-  yum: name={{ item }} state=latest
-  with_items:
-    - libffi-devel
-    - openssl-devel
-
-- name: Install psycopg2 dependencies
-  yum: name=postgresql-devel state=latest
-
 - name: Create application user
   user: name={{ application_user }} state=present
 
