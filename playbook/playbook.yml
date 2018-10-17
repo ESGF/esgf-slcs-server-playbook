@@ -6,8 +6,6 @@
   environment:
     LD_LIBRARY_PATH: /usr/local/conda/envs/esgf-pub/lib/:/usr/local/conda/envs/esgf-pub/lib/python2.7/:/usr/local/conda/envs/esgf-pub/lib/python2.7/site-packages/mod_wsgi/server
   roles:
-    - git
-    - { role: python27, when: virtualenv_command is not defined }
     - { role: postgresql, when: configure_databases }
     - { role: nginx, when: use_nginx_proxy }
     - { role: supervisord, when: use_waitress_wsgi }
