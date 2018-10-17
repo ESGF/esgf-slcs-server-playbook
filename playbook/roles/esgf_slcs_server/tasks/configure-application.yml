@@ -51,13 +51,13 @@
     - Restart ESGF SLCS Server
 
 - name: Run database migrations
-  shell: "{{ application_home }}/venv/bin/python {{ code_location }}/manage.py migrate"
+  shell: "/usr/local/conda/envs/esgf-pub/bin/python {{ code_location }}/manage.py migrate"
   become: yes
   become_user: "{{ application_user }}"
 
 - name: Create Django superuser
   shell: >
-    {{ application_home }}/venv/bin/python  \
+    /usr/local/conda/envs/esgf-pub/bin/python  \
     {{ code_location }}/manage.py createsuperuser  \
     --noinput --username={{ django_superuser }} --email=notused@notused.com
   become: yes
@@ -68,5 +68,5 @@
 
 - name: Collect static files
   shell: >
-    {{ application_home }}/venv/bin/python  \
+    /usr/local/conda/envs/esgf-pub/bin/python  \
     {{ code_location }}/manage.py collectstatic --noinput --clear
