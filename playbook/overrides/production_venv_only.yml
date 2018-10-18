@@ -54,7 +54,7 @@ install_mode: production
 # The ESGF SLCS server version to install
 #   Only used in production
 #   Can be any valid branch, tag or commit hash from https://github.com/cedadev/esgf-slcs-server
-esgf_slcs_server_version: 3.0
+esgf_slcs_server_version: master
 
 #####
 ## Database setup and configuration
