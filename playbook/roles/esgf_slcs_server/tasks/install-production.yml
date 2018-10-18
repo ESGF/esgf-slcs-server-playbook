@@ -16,6 +16,7 @@
   pip:
     executable: /usr/local/conda/envs/esgf-pub/bin/pip
     requirements: "{{ code_location }}/requirements.txt"
+    extra_args: --user
   become: yes
   become_user: "{{ application_user }}"
 
