@@ -18,7 +18,7 @@
     requirements: "{{ code_location }}/requirements.txt"
     extra_args: --user
   become: yes
-  become_user: "{{ application_user }}"
+  become_user: root
 
 - name: Install ESGF SLCS Server
   pip:
@@ -26,6 +26,6 @@
     name: "{{ code_location }}"
     extra_args: "--no-deps -e"
   become: yes
-  become_user: "{{ application_user }}"
+  become_user: root
   notify:
     - Restart ESGF SLCS Server
