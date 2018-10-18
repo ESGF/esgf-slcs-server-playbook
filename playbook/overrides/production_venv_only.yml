@@ -37,7 +37,8 @@ use_waitress_wsgi: false
 # The user to install and run the application as
 #   This should be an unpriveleged user
 #   If the user doesn't exist, they will be created
-application_user: apache
+#TODO: for 3.0 this is being set to root in order to work; discussion about alternatives will need to be had
+application_user: root
 
 # The directory in which to install application code
 #   If not given, this defaults to the home directory of the application_user
