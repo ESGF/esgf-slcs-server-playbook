@@ -110,8 +110,8 @@ onlineca_trustroots_dir: /etc/grid-security/certificates
 #   - /path/to/cert2
 
 # Template for the subject of certificates issued by the SLCS server
-#   $OPENID is replaced with the user's OpenID
-onlineca_cert_subject_template: "/DC=esgf/CN=$OPENID"
+#   {user} is replaced with the user's OpenID
+onlineca_cert_subject_template: "/DC=esgf/CN={user}"
 
 #####
 ## Application configuration

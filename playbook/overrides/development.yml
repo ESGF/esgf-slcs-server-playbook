@@ -1,6 +1,6 @@
 #####
 ## This file contains variable definitions for a development install
-## Because OAuth expects to run over HTTP, this still uses Nginx, but expects
+## Because OAuth expects to run over HTTPS, this still uses Nginx, but expects
 ## the Django development server to be started on port 5000
 #####
 
@@ -10,6 +10,12 @@
 # The name of the server
 #   This should be the domain name by which the machine will be accessed over HTTP
 server_name: 172.28.128.7
+
+# The URL prefix that the SLCS is deployed under
+#   NOTE: This is only used in the generation of the CERTIFICATE_SCOPE
+#         It has no impact on the Nginx config, so should be empty for all
+#         deployments made by this playbook that use Nginx
+esgf_slcs_url_prefix: ""
 
 # The email address to use for emails sent by the application
 server_email: no-reply@{{ server_name }}
@@ -93,7 +99,7 @@ install_test_ca: true
 
 # Template for the subject of certificates issued by the SLCS server
 #   $OPENID is replaced with the user's OpenID
-onlineca_cert_subject_template: "/DC=esgf/CN=$OPENID"
+onlineca_cert_subject_template: "/DC=esgf/CN={user}"
 
 #####
 ## Application configuration

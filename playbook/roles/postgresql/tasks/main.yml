@@ -5,6 +5,7 @@
   with_items:
     - postgresql
     - postgresql-server
+    - postgresql-contrib
 
 - name: Initialise PostgreSQL
   command: service postgresql initdb

@@ -1,2 +1,4 @@
 server_protocol: https
 server_root: "{{ server_protocol }}://{{ server_name }}"
+
+esgf_slcs_url_prefix: /esgf-slcs

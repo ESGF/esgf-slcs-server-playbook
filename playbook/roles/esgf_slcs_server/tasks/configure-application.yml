@@ -50,13 +50,6 @@
   notify:
     - Restart ESGF SLCS Server
 
-- name: Install OnlineCA config
-  template: src=templates/onlineca.ini.j2 dest={{ application_home }}/conf/app/onlineca.ini
-  become: yes
-  become_user: "{{ application_user }}"
-  notify:
-    - Restart ESGF SLCS Server
-
 - name: Run database migrations
   shell: "{{ application_home }}/venv/bin/python {{ code_location }}/manage.py migrate"
   become: yes

@@ -4,25 +4,24 @@ Django settings for the ESGF SLCS Server.
 """
 
 import os
-from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '{{ server_name }}']
-
 {% if django_debug_mode %}
 DEBUG = True
+# When running in debug mode, allow any host headers
+ALLOWED_HOSTS = ['*']
 {% else %}
 DEBUG = False
-
-# Security settings
+# Security settings
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
+ALLOWED_HOSTS = ['{{ server_name }}']
 {% endif %}
 
 # Read the secret key from a file
@@ -111,7 +110,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_wsgi.handler.APPLICATION'
+WSGI_APPLICATION = 'esgf_slcs_server.wsgi.application'
 
 
 DATABASES = {
@@ -191,7 +190,7 @@ BOOTSTRAP3 = {
 
 
 # OAuth provider configuration
-CERTIFICATE_SCOPE = '{{ server_root }}/esgf-slcs/oauth/certificate/'
+CERTIFICATE_SCOPE = '{{ server_root }}{{ esgf_slcs_url_prefix }}/oauth/certificate/'
 OAUTH2_PROVIDER = {
     'SCOPES' : {
         CERTIFICATE_SCOPE : 'Obtain short-lived certificate for user',
@@ -202,8 +201,18 @@ OAUTH2_PROVIDER = {
 BASIC_AUTH_REALM = 'esgf.llnl.gov'
 
 
-# Configuration for the Online CA WSGI application
-# This is instantiated using the PasteDeploy app_factory, so the configuration below
-# corresponds to the global and local configs expected by that function
-ONLINECA_PASTEDEPLOY_CONF = 'config:{{ application_home }}/conf/app/onlineca.ini'
-ONLINECA_DJANGO_USER_TO_OPENID = 'esgf_auth.openid.django_user_to_openid'
+# OnlineCA settings
+ONLINECA = {
+    'TRUSTROOTS_DIR': '{{ onlineca_trustroots_dir }}',
+    'USER_TO_STRING_MAPPER': 'esgf_auth.openid.django_user_to_openid',
+    'SUBJECT_NAME_TEMPLATE': '{{ onlineca_cert_subject_template }}',
+    'CA_CERT_PATH': '{{ onlineca_cert_file }}',
+    'CA_KEY_PATH': '{{ onlineca_key_file }}',
+    {% if onlineca_cacert_chain_filepaths is defined %}
+    'CA_CERT_CHAIN_PATHS': [
+        {% for path in onlineca_cacert_chain_filepaths %}
+        '{{ path }}',
+        {% endfor %}
+    ],
+    {% endif %}
+}
