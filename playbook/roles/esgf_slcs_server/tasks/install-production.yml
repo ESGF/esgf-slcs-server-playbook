@@ -14,15 +14,14 @@
 
 - name: Install ESGF SLCS Server dependencies
   pip:
-    executable: /usr/local/conda/envs/esgf-pub/bin/pip
+    executable: pip
     requirements: "{{ code_location }}/requirements.txt"
-    extra_args: --user
   become: yes
   become_user: root
 
 - name: Install ESGF SLCS Server
   pip:
-    executable: /usr/local/conda/envs/esgf-pub/bin/pip
+    executable: pip
     name: "{{ code_location }}"
     extra_args: "--no-deps -e"
   become: yes
